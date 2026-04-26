@@ -1,6 +1,6 @@
-# koenvanderborght-dev
+# borght-dev.github.io
 
-Personal site at [koenvanderborght-dev.github.io](https://koenvanderborght-dev.github.io). Built with [Astro 5](https://astro.build), authored from phone via [Obsidian](https://obsidian.md).
+Personal site at [koenvdborght.nl](https://koenvdborght.nl) (canonical) — also reachable at [borght-dev.github.io](https://borght-dev.github.io). Built with [Astro 5](https://astro.build), authored from phone via [Obsidian](https://obsidian.md).
 
 ## Quick start (laptop)
 

@@ -3,7 +3,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
-  site: 'https://koenvanderborght-dev.github.io',
+  site: 'https://koenvdborght.nl',
   integrations: [mdx(), sitemap()],
   markdown: {
     shikiConfig: {

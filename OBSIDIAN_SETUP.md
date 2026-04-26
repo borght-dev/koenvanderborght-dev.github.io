@@ -23,7 +23,7 @@ You need a git client on the phone that Obsidian can integrate with.
 **On iOS (Working Copy):**
 
 1. Open Working Copy → "+ Clone repository"
-2. URL: `https://github.com/KoenvanderBorght-Dev/koenvanderborght-dev.github.io.git`
+2. URL: `https://github.com/borght-dev/borght-dev.github.io.git`
 3. Authenticate with GitHub (Working Copy walks you through it)
 4. Once cloned, tap the repo → "Setup External Editor" → choose Obsidian → point at the **whole repo folder** (not just `content/`)
 
@@ -53,7 +53,7 @@ Optional but recommended — install these community plugins:
    - Change `draft: true` → `draft: false`
    - Add `date: 2026-04-25` (today)
 4. Tap **Working Copy → Push** (iOS) or **Obsidian Git → Push** (Android)
-5. GitHub Action rebuilds → live in ~60s at [koenvanderborght-dev.github.io](https://koenvanderborght-dev.github.io)
+5. GitHub Action rebuilds → live in ~60s at [koenvdborght.nl](https://koenvdborght.nl)
 
 That's it.
 
@@ -139,7 +139,7 @@ Just delete the `> *Draft.*` lines and start writing.
 ## Troubleshooting
 
 **Push fails on phone**
-- Check that Working Copy / Obsidian Git is authenticated as `KoenvanderBorght-Dev` (not your work account).
+- Check that Working Copy / Obsidian Git is authenticated as `borght-dev` (not your work account).
 
 **Site doesn't update after push**
 - Check Actions tab on GitHub. The deploy workflow takes ~60s.
