@@ -23,3 +23,7 @@ node_modules/
 # public/ wordt niet gebruikt, maar kan geen kwaad om toch te negeren
 public/
 
+# Astro experiment build artifacts
+.astro/
+dist/
+
