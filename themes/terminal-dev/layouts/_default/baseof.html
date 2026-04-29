@@ -18,21 +18,32 @@
     {{ partial "footer.html" . }}
 
     <script>
-        const toggle = document.getElementById('theme-toggle');
-        const root = document.documentElement;
-        toggle?.addEventListener('click', () => {
-            if (root.classList.contains('light-mode')) {
-                root.classList.remove('light-mode');
-                root.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
-            } else if (root.classList.contains('dark-mode')) {
-                root.classList.remove('dark-mode');
-                localStorage.removeItem('theme');
-            } else {
-                root.classList.add('light-mode');
-                localStorage.setItem('theme', 'light');
-            }
-        });
+        (function () {
+            const toggle = document.getElementById('theme-toggle');
+            const label = document.getElementById('theme-label');
+            const root = document.documentElement;
+            const current = () => {
+                if (root.classList.contains('light-mode')) return 'light';
+                if (root.classList.contains('dark-mode'))  return 'dark';
+                return 'auto';
+            };
+            const refresh = () => { if (label) label.textContent = current(); };
+            refresh();
+            toggle?.addEventListener('click', () => {
+                if (root.classList.contains('light-mode')) {
+                    root.classList.remove('light-mode');
+                    root.classList.add('dark-mode');
+                    localStorage.setItem('theme', 'dark');
+                } else if (root.classList.contains('dark-mode')) {
+                    root.classList.remove('dark-mode');
+                    localStorage.removeItem('theme');
+                } else {
+                    root.classList.add('light-mode');
+                    localStorage.setItem('theme', 'light');
+                }
+                refresh();
+            });
+        })();
     </script>
 </body>
 </html>

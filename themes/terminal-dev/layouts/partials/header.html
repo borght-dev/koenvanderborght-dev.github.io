@@ -8,9 +8,8 @@
     <nav class="topbar-nav" aria-label="primary">
       <a href="/posts/"    class="{{ if hasPrefix $p "/posts" }}active{{ end }}">~/blog</a>
       <a href="/series/"   class="{{ if hasPrefix $p "/series" }}active{{ end }}">~/series</a>
-      <a href="/projects/" class="hide-mobile {{ if hasPrefix $p "/projects" }}active{{ end }}">~/projects</a>
-      <a href="/about/"    class="hide-mobile {{ if hasPrefix $p "/about" }}active{{ end }}">~/about</a>
-      <button id="theme-toggle" class="topbar-toggle" aria-label="Toggle theme">◐</button>
+      <a href="https://borgdock.pages.dev/" target="_blank" rel="noopener" class="hide-mobile">borgdock&nbsp;↗</a>
+      <a href="/about/"    class="{{ if hasPrefix $p "/about" }}active{{ end }}">~/about</a>
     </nav>
   </div>
 </header>

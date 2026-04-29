@@ -5,13 +5,13 @@
     <h4>// connect</h4>
     {{ with .Site.Params.github }}<a href="{{ . }}" target="_blank" rel="noopener">GitHub</a>{{ end }}
     {{ with .Site.Params.linkedin }}<a href="{{ . }}" target="_blank" rel="noopener">LinkedIn</a>{{ end }}
+    <a href="https://borgdock.pages.dev/" target="_blank" rel="noopener">BorgDock</a>
     <a href="/index.xml">RSS</a>
   </div>
   <div class="foot-col">
     <h4>// navigate</h4>
     <a href="/posts/">~/blog</a>
     <a href="/series/">~/series</a>
-    <a href="/projects/">~/projects</a>
     <a href="/about/">~/about</a>
   </div>
   <div class="foot-col">
@@ -26,7 +26,14 @@
 
 <div class="foot-bottom">
   <span>© {{ $year }} Koen van der Borght · made in /home</span>
-  <span style="display:inline-flex;align-items:center;gap:0.5rem;">
-    <span class="pulse-dot"></span> all systems operational
+  <span style="display:inline-flex;align-items:center;gap:0.75rem;">
+    <span style="display:inline-flex;align-items:center;gap:0.5rem;">
+      <span class="pulse-dot"></span> all systems operational
+    </span>
+    <button id="theme-toggle" class="foot-theme-toggle" aria-label="Cycle theme: auto, light, dark">
+      <span aria-hidden="true">◐</span>
+      <span>theme:</span>
+      <span id="theme-label" class="foot-theme-label">auto</span>
+    </button>
   </span>
 </div>
