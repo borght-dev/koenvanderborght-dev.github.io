@@ -1,0 +1,107 @@
+{{ define "main" }}
+{{- $items := where .Pages ".Params.draft" "ne" true -}}
+{{- $items = $items.ByDate.Reverse -}}
+{{- $latest := index $items 0 -}}
+{{- $seriesRoot := $.Site.GetPage "/series" -}}
+{{- $seriesCount := 0 -}}
+{{- if $seriesRoot }}{{ $seriesCount = len $seriesRoot.Sections }}{{ end -}}
+
+{{/* Tag counts */}}
+{{- $tagMap := dict -}}
+{{- range $items -}}
+  {{- range .Params.tags -}}
+    {{- $cur := index $tagMap . | default 0 -}}
+    {{- $tagMap = merge $tagMap (dict . (add $cur 1)) -}}
+  {{- end -}}
+{{- end -}}
+{{- $sortedTags := slice -}}
+{{- range $name, $count := $tagMap -}}
+  {{- $sortedTags = $sortedTags | append (dict "name" $name "count" $count) -}}
+{{- end -}}
+{{- $sortedTags = sort $sortedTags "count" "desc" -}}
+
+<section class="blog-list">
+  <nav class="breadcrumbs">
+    <a href="/">~</a><span class="sep">/</span>
+    <a href="/posts/">blog</a>
+  </nav>
+
+  <header class="blog-list-header">
+    <div class="prompt-line">
+      <span class="dollar">$</span>
+      <span class="cmd">ls -la</span>
+      <span class="path">~/blog</span>
+    </div>
+    <p class="blog-list-meta">
+      {{ len $items }} {{ if eq (len $items) 1 }}post{{ else }}posts{{ end }}
+      {{ if gt $seriesCount 0 }} · {{ $seriesCount }} {{ if eq $seriesCount 1 }}series{{ else }}series{{ end }}{{ end }}
+      {{ if $latest }} · last entry {{ dateFormat "2006-01-02" $latest.Date }}{{ end }}
+    </p>
+  </header>
+
+  <div class="blog-tabs" role="tablist" aria-label="filter by tag">
+    <button class="blog-tab is-active" role="tab" aria-selected="true" data-tag="all">
+      all <span class="blog-tab-count">{{ len $items }}</span>
+    </button>
+    {{ range $sortedTags }}
+      <button class="blog-tab" role="tab" aria-selected="false" data-tag="{{ .name }}">
+        {{ .name }} <span class="blog-tab-count">{{ .count }}</span>
+      </button>
+    {{ end }}
+  </div>
+
+  <ol class="blog-rows" role="list">
+    {{ range $i, $p := $items }}
+      {{- $words   := len (split .Plain " ") -}}
+      {{- $minutes := math.Max 1 (math.Ceil (div (float $words) 200.0)) -}}
+      {{- $tagAttr := "" -}}
+      {{- range .Params.tags }}{{ $tagAttr = printf "%s %s" $tagAttr . }}{{ end -}}
+      <li class="blog-row{{ if eq $i 0 }} is-latest{{ end }}" data-tags="{{ trim $tagAttr " " }}">
+        <a href="{{ .RelPermalink }}" class="blog-row-link">
+          <span class="blog-row-date">{{ dateFormat "2006-01-02" .Date }}</span>
+          <div class="blog-row-body">
+            {{ if eq $i 0 }}<span class="blog-row-tag-latest">// LATEST</span>{{ end }}
+            <h3 class="blog-row-title">{{ .Title }}</h3>
+            {{ with .Params.subtitle }}<p class="blog-row-desc">{{ . }}</p>{{ end }}
+            {{ if not .Params.subtitle }}{{ with .Params.description }}<p class="blog-row-desc">{{ . }}</p>{{ end }}{{ end }}
+            {{ if .Params.tags }}
+              <div class="blog-row-tags">
+                {{ range .Params.tags }}<span class="blog-row-hashtag">#{{ . }}</span>{{ end }}
+              </div>
+            {{ end }}
+          </div>
+          <span class="blog-row-read">{{ $minutes }} min</span>
+          <span class="blog-row-arrow" aria-hidden="true">→</span>
+        </a>
+      </li>
+    {{ end }}
+    {{ if eq (len $items) 0 }}<p class="tagline">Nothing published yet.</p>{{ end }}
+  </ol>
+</section>
+
+<script>
+  (function () {
+    const tabs = document.querySelectorAll('.blog-tab');
+    const rows = document.querySelectorAll('.blog-row');
+    if (!tabs.length || !rows.length) return;
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const tag = tab.dataset.tag;
+        tabs.forEach(t => {
+          const active = t === tab;
+          t.classList.toggle('is-active', active);
+          t.setAttribute('aria-selected', active ? 'true' : 'false');
+        });
+        rows.forEach(row => {
+          if (tag === 'all') {
+            row.hidden = false;
+            return;
+          }
+          const tags = (row.dataset.tags || '').split(/\s+/);
+          row.hidden = !tags.includes(tag);
+        });
+      });
+    });
+  })();
+</script>
+{{ end }}
