@@ -15,6 +15,9 @@
     <div class="cv-hero-text">
       <h1 class="cv-headline">Hi, I'm <span class="accent">Koen</span>.</h1>
       <p class="cv-intro">{{ .Params.intro | markdownify }}</p>
+      <button type="button" class="cv-download" onclick="window.print()" aria-label="Save as PDF">
+        <span class="g">$</span><span class="c">save</span><span class="a">--as=pdf</span>
+      </button>
     </div>
     {{ with .Params.photo }}
       <figure class="cv-photo">
