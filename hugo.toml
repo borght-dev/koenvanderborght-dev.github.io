@@ -1,4 +1,4 @@
-baseURL = "https://KoenvanderBorght-Dev.github.io/"
+baseURL = "https://koenvdborght.nl/"
 languageCode = "en-us"
 title = "Koen van der Borght"
 theme = "terminal-dev"
@@ -19,7 +19,7 @@ theme = "terminal-dev"
   defaultTheme = "light"
   enableTaglineTypingEffect = false
   linkedin = "https://www.linkedin.com/in/koen-van-der-borght-tilburg/"
-  github = "https://github.com/KoenvanderBorght-Dev/"
+  github = "https://github.com/borght-dev/"
   email = "koenvanderborght@outlook.com"
 
 [menu]
