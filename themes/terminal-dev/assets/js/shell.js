@@ -93,6 +93,8 @@ export function bootShell() {
       if (url.startsWith('http')) {
         window.open(url, '_blank', 'noopener');
       } else {
+        // Persist a flag so the shell reopens on the destination page.
+        try { sessionStorage.setItem('shell:reopen', '1'); } catch { /* ignore */ }
         window.location.href = url;
       }
     },
@@ -166,6 +168,14 @@ export function bootShell() {
   }
 
   print(`koen@web — type 'help' for commands. ESC or 'exit' to close.`);
+
+  // Reopen the shell after a same-tab navigation triggered by `cd`/`cat`.
+  try {
+    if (sessionStorage.getItem('shell:reopen') === '1') {
+      sessionStorage.removeItem('shell:reopen');
+      open();
+    }
+  } catch { /* ignore */ }
 }
 
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
