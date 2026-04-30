@@ -95,6 +95,9 @@ export function bootShell() {
   const close = () => {
     drawer.classList.remove('open');
     drawer.setAttribute('aria-hidden', 'true');
+    // Blur the input so global hotkeys (e.g. `\`) work again without first
+    // requiring a click elsewhere to lose focus.
+    input.blur();
   };
 
   const ctx = {
