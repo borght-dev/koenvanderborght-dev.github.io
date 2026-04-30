@@ -189,6 +189,16 @@ export function bootShell() {
     });
   }
 
+  // Global hotkey: backslash opens the shell from any page, except when
+  // the user is already typing in an input/textarea/contenteditable.
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== '\\') return;
+    const t = e.target;
+    if (t && (t.tagName === 'INPUT' || t.tagName === 'TEXTAREA' || t.isContentEditable)) return;
+    e.preventDefault();
+    open();
+  });
+
   // Detect reopen-after-navigation before printing the welcome banner.
   let reopening = false;
   try {
