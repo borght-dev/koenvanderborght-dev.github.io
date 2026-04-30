@@ -34,7 +34,8 @@
 
 {{ $opts := dict "targetPath" "main.css" "enableSourceMap" false }}
 {{ $style := resources.Get "sass/main.scss" | css.Sass $opts | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
+{{/* onerror recovers from stale cached HTML pointing to a fingerprinted CSS that no longer exists post-deploy. Guarded to fire at most once per tab to avoid reload loops. */}}
+<link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}" onerror="(function(){try{if(sessionStorage.getItem('css-recovered'))return;sessionStorage.setItem('css-recovered','1');location.reload()}catch(e){location.reload()}})()">
 
 {{ $jsOpts := dict "minify" true "format" "esm" "targetPath" "js/ps-live.js" }}
 {{ $psLive := resources.Get "js/ps-live.js" | js.Build $jsOpts | resources.Fingerprint }}
