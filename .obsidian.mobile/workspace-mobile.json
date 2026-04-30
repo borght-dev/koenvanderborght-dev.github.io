@@ -1,0 +1,220 @@
+{
+  "main": {
+    "id": "92a5d69e7d07abbc",
+    "type": "split",
+    "children": [
+      {
+        "id": "8577f231b295bac1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "aef4d3939827b728",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "content/series/borgdock/01-why-a-sidebar.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "01-why-a-sidebar"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a5caa08eb8b27684",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "acad454d953d6869",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {
+            "sortOrder": "alphabetical",
+            "autoReveal": false
+          },
+          "icon": "lucide-folder-closed",
+          "title": "Files"
+        }
+      },
+      {
+        "id": "f0200edde7cd16fb",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
+          },
+          "icon": "lucide-search",
+          "title": "Search"
+        }
+      },
+      {
+        "id": "503c830c955ff158",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true,
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-tags",
+          "title": "Tags"
+        }
+      },
+      {
+        "id": "0aafcf653b1dabd2",
+        "type": "leaf",
+        "state": {
+          "type": "all-properties",
+          "state": {
+            "sortOrder": "frequency",
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-archive",
+          "title": "All properties"
+        }
+      },
+      {
+        "id": "34a260a8597301fd",
+        "type": "leaf",
+        "state": {
+          "type": "bookmarks",
+          "state": {},
+          "icon": "lucide-bookmark",
+          "title": "Bookmarks"
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "right": {
+    "id": "b587b0ea013b10d8",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "2241ad94677d7448",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "content/series/borgdock/01-why-a-sidebar.md",
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": false,
+            "searchQuery": "",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          },
+          "icon": "links-coming-in",
+          "title": "Backlinks"
+        }
+      },
+      {
+        "id": "53bf8fdb6e3e58e9",
+        "type": "leaf",
+        "state": {
+          "type": "outgoing-link",
+          "state": {
+            "file": "content/series/borgdock/01-why-a-sidebar.md",
+            "linksCollapsed": false,
+            "unlinkedCollapsed": true
+          },
+          "icon": "links-going-out",
+          "title": "Outgoing links"
+        }
+      },
+      {
+        "id": "f84cfeeb8bf3b6e0",
+        "type": "leaf",
+        "state": {
+          "type": "outline",
+          "state": {
+            "file": "content/series/borgdock/01-why-a-sidebar.md",
+            "followCursor": false,
+            "showSearch": false,
+            "searchQuery": ""
+          },
+          "icon": "lucide-list",
+          "title": "Outline"
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false
+    }
+  },
+  "active": "aef4d3939827b728",
+  "lastOpenFiles": [
+    "content/posts/borgdock-1-1-0-tray-first.md",
+    "hugo.toml",
+    "themes/themes/anubis2/exampleSiteMultilingual/assets/custom-css/foundation/_vars.scss",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/advancedstyle/style.css",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/advancedstyle/index.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/demo-diagram/index.zh.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/demo-diagram/index.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/demo-diagram/icon.svg",
+    "themes/themes/anubis2/layouts/partials/analytics/umami_analytics.html",
+    "themes/themes/anubis2/layouts/partials/analytics/google_analytics.html",
+    "themes/themes/anubis2/layouts/partials/feat-comments/giscus.html",
+    "themes/themes/anubis2/layouts/partials/feat-comments/comments.html",
+    "themes/themes/anubis2/layouts/partials/feat-comments/disqus.html",
+    "themes/themes/anubis2/layouts/partials/feat-comments/isso.html",
+    "themes/themes/anubis2/layouts/partials/feat-comments/utterances.html",
+    "themes/themes/anubis2/layouts/partials/fa-icons/halfcircle.svg",
+    "themes/themes/anubis2/layouts/partials/fa-icons/soundcloud.svg",
+    "themes/themes/anubis2/layouts/partials/fa-icons/patreon.svg",
+    "themes/themes/anubis2/layouts/partials/fa-icons/twitter.svg",
+    "themes/themes/anubis2/layouts/partials/fa-icons/linkedin.svg",
+    "themes/themes/anubis2/layouts/partials/fa-icons/reddit.svg",
+    "themes/themes/anubis2/layouts/partials/fa-icons/youtube.svg",
+    "themes/themes/anubis2/layouts/partials/fa-icons/twitch.svg",
+    "themes/themes/anubis2/layouts/partials/fa-icons/facebook.svg",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/homepage/about.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/homepage/index.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/homepage/work.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/emoji-support.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/_index.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/demo-summary-rendering-4.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/math-typesetting.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/icons.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/demo-summary-rendering-1.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/hidden-post.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/demo-summary-rendering-5.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/hidden-post.pl.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/markdown-syntax.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/rich-content.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/emoji-support.zh.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/demo-summary-rendering-8.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/demo-code-pre-kbd-mark.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/demo-multiline-codes.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/_index.pl.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/demo-summary-rendering-2.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/demo-summary-rendering-6.md",
+    "themes/themes/anubis2/exampleSiteMultilingual/content/posts/placeholder-text.md"
+  ]
+}
