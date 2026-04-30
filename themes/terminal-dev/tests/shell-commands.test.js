@@ -120,3 +120,66 @@ test(':q!: invokes ctx.close()', () => {
   dispatch(':q!', ctx);
   assert.equal(ctx.calls.close, 1);
 });
+
+test('ls: no args lists top-level sections', () => {
+  const ctx = makeCtx();
+  dispatch('ls', ctx);
+  const out = ctx.calls.print.join(' ');
+  for (const s of ctx.site.sections) assert.ok(out.includes(s));
+});
+
+test('ls posts/: lists posts from ctx.site.posts', () => {
+  const ctx = makeCtx();
+  dispatch('ls posts/', ctx);
+  const out = ctx.calls.print.join('\n');
+  assert.ok(out.includes('hello-world.md'));
+  assert.ok(out.includes('ai-native-dev.md'));
+});
+
+test('ls unknown/: prints not-found error', () => {
+  const ctx = makeCtx();
+  dispatch('ls nonsense/', ctx);
+  assert.match(ctx.calls.print.join(' '), /no such file or directory/i);
+});
+
+test('cat ~/.identity: navigates to /about/', () => {
+  const ctx = makeCtx();
+  dispatch('cat ~/.identity', ctx);
+  assert.deepEqual(ctx.calls.navigate, ['/about/']);
+});
+
+test('cat now_shipping.md: navigates to home anchor', () => {
+  const ctx = makeCtx();
+  dispatch('cat now_shipping.md', ctx);
+  assert.deepEqual(ctx.calls.navigate, ['/#now-shipping']);
+});
+
+test('cat <post>.md: navigates to /posts/<slug>/', () => {
+  const ctx = makeCtx();
+  dispatch('cat hello-world.md', ctx);
+  assert.deepEqual(ctx.calls.navigate, ['/posts/hello-world/']);
+});
+
+test('cat unknown: prints error', () => {
+  const ctx = makeCtx();
+  dispatch('cat nope.md', ctx);
+  assert.match(ctx.calls.print.join(' '), /no such file/i);
+});
+
+test('cd ~/about: navigates', () => {
+  const ctx = makeCtx();
+  dispatch('cd ~/about', ctx);
+  assert.deepEqual(ctx.calls.navigate, ['/about/']);
+});
+
+test('cd ~/borgdock: navigates to external', () => {
+  const ctx = makeCtx();
+  dispatch('cd ~/borgdock', ctx);
+  assert.deepEqual(ctx.calls.navigate, ['https://borgdock.pages.dev/']);
+});
+
+test('cd unknown: prints error', () => {
+  const ctx = makeCtx();
+  dispatch('cd ~/nowhere', ctx);
+  assert.match(ctx.calls.print.join(' '), /no such file or directory/i);
+});

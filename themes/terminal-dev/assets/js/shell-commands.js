@@ -55,6 +55,63 @@ export const commands = [
     },
   },
   {
+    name: 'ls',
+    summary: 'list directory',
+    run(ctx, args) {
+      const target = args[0];
+      if (!target || target === '~' || target === '~/') {
+        for (const s of ctx.site.sections) ctx.print(`${s}/`);
+        return;
+      }
+      const sub = target.replace(/\/$/, '').replace(/^~\//, '');
+      const list = ctx.site[sub];
+      if (!Array.isArray(list)) {
+        ctx.print(`ls: ${target}: no such file or directory`);
+        return;
+      }
+      for (const item of list) ctx.print(item);
+    },
+  },
+  {
+    name: 'cat',
+    summary: 'navigate to a file',
+    run(ctx, args) {
+      const target = args[0];
+      if (!target) { ctx.print('cat: missing operand'); return; }
+      if (target === '~/.identity') return ctx.navigate('/about/');
+      if (target === 'now_shipping.md') return ctx.navigate('/#now-shipping');
+      if (target.endsWith('.md')) {
+        const slug = target.replace(/\.md$/, '');
+        if (ctx.site.posts && ctx.site.posts.includes(target)) {
+          return ctx.navigate(`/posts/${slug}/`);
+        }
+        if (ctx.site.series && ctx.site.series.includes(slug)) {
+          return ctx.navigate(`/series/${slug}/`);
+        }
+      }
+      ctx.print(`cat: ${target}: no such file or directory`);
+    },
+  },
+  {
+    name: 'cd',
+    summary: 'change directory',
+    run(ctx, args) {
+      const target = args[0];
+      const map = {
+        '~': '/',
+        '~/': '/',
+        '~/about': '/about/',
+        '~/posts': '/posts/',
+        '~/series': '/series/',
+        '~/borgdock': 'https://borgdock.pages.dev/',
+      };
+      if (target && Object.prototype.hasOwnProperty.call(map, target)) {
+        return ctx.navigate(map[target]);
+      }
+      ctx.print(`cd: ${target || ''}: no such file or directory`);
+    },
+  },
+  {
     name: 'exit',
     summary: 'close the shell',
     run(ctx) { ctx.close(); },
