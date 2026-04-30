@@ -56,10 +56,12 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "test": "node --test tests/"
+    "test": "node --test tests/*.test.js"
   }
 }
 ```
+
+(Note: Node 22.22 does not accept a bare directory argument for `--test`; we use a glob.)
 
 - [ ] **Step 2: Create smoke test**
 
