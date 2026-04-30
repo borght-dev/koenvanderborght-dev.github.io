@@ -13,5 +13,5 @@ export function dispatch(input, ctx) {
     ctx.print(`zsh: command not found: ${name}`);
     return;
   }
-  cmd.run(ctx, args, input);
+  cmd.run(ctx, args);
 }
