@@ -15,6 +15,10 @@ rows:
     state_text: "3 posts queued"
     state_class: ps-state-active
     uptime: weekly
+    live:
+      kind: build-post-count
+      target: state
+      template: "%d posts queued"
 
   - pid: 8423
     name: gomocha/field-svc

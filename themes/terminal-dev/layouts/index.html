@@ -42,11 +42,21 @@
           <span role="columnheader">STATE</span>
           <span role="columnheader">UPTIME</span>
         </div>
+        {{- $postCount := 0 -}}
+        {{- range os.ReadDir "content/posts" -}}
+          {{- if and (not .IsDir) (hasSuffix .Name ".md") (ne .Name "_index.md") -}}
+            {{- $postCount = add $postCount 1 -}}
+          {{- end -}}
+        {{- end -}}
         {{- range site.Data.ps_running.rows }}
+          {{- $stateText := .state_text -}}
+          {{- if and .live (eq .live.kind "build-post-count") -}}
+            {{- $stateText = printf .live.template $postCount -}}
+          {{- end -}}
         <div class="ps-row" role="row"{{- with .live }} data-live-kind="{{ .kind }}"{{- with .repo }} data-live-repo="{{ . }}"{{ end }}{{- with .since }} data-live-since="{{ . }}"{{ end }}{{- with .target }} data-live-target="{{ . }}"{{ end }}{{- with .template }} data-live-template="{{ . }}"{{ end }}{{- end }}>
           <span class="ps-pid" role="cell">{{ .pid }}</span>
           <span class="ps-name" role="cell">{{ .name }}</span>
-          <span class="ps-state {{ .state_class }}" role="cell">{{ .state_text }}</span>
+          <span class="ps-state {{ .state_class }}" role="cell">{{ $stateText }}</span>
           <span class="ps-uptime" role="cell">{{ .uptime }}</span>
         </div>
         {{- end }}
