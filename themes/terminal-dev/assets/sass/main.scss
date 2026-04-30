@@ -2331,8 +2331,10 @@ footer.foot {
 }
 
 /* The shell only works with a physical keyboard; hide the hints on touch
-   devices where pressing \ is awkward and the drawer UX is poor. */
-@media (hover: none) and (pointer: coarse) {
+   devices and narrow viewports where pressing \ is awkward. The OR
+   combination catches phones whose UAs misreport (hover/pointer) plus
+   any narrow desktop window. */
+@media (pointer: coarse), (max-width: 768px) {
   .prompt-hint, .foot-shell-hint { display: none !important; }
 }
 
