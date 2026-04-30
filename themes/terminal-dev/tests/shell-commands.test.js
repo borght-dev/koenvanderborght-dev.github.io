@@ -18,6 +18,7 @@ function makeCtx() {
     },
     history: [],
     dadModeSince: '2023-07-23',
+    pwd: '~',
   };
 }
 
@@ -140,6 +141,29 @@ test('ls unknown/: prints not-found error', () => {
   const ctx = makeCtx();
   dispatch('ls nonsense/', ctx);
   assert.match(ctx.calls.print.join(' '), /no such file or directory/i);
+});
+
+test('ls (no args) in ~/posts: lists posts from cwd', () => {
+  const ctx = makeCtx();
+  ctx.pwd = '~/posts';
+  dispatch('ls', ctx);
+  const out = ctx.calls.print.join('\n');
+  assert.ok(out.includes('hello-world.md'));
+  assert.ok(out.includes('ai-native-dev.md'));
+});
+
+test('ls (no args) in ~/series: lists series from cwd', () => {
+  const ctx = makeCtx();
+  ctx.pwd = '~/series';
+  dispatch('ls', ctx);
+  assert.ok(ctx.calls.print.some((l) => l.includes('terminal-redesign')));
+});
+
+test('ls (no args) in a leaf dir: prints nothing', () => {
+  const ctx = makeCtx();
+  ctx.pwd = '~/posts/hello-world';
+  dispatch('ls', ctx);
+  assert.equal(ctx.calls.print.length, 0);
 });
 
 test('cat ~/.identity: navigates to /about/', () => {

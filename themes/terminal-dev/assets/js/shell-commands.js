@@ -59,17 +59,21 @@ export const commands = [
     summary: 'list directory',
     run(ctx, args) {
       const target = args[0];
-      if (!target || target === '~' || target === '~/') {
+      const path = target || ctx.pwd || '~';
+      const trimmed = path.replace(/\/$/, '').replace(/^~\/?/, '');
+      // Root: list sections with trailing slash
+      if (trimmed === '' || trimmed === '~') {
         for (const s of ctx.site.sections) ctx.print(`${s}/`);
         return;
       }
-      const sub = target.replace(/\/$/, '').replace(/^~\//, '');
-      const list = ctx.site[sub];
-      if (!Array.isArray(list)) {
-        ctx.print(`ls: ${target}: no such file or directory`);
+      // A known section (posts, series, ...): list its files
+      const list = ctx.site[trimmed];
+      if (Array.isArray(list)) {
+        for (const item of list) ctx.print(item);
         return;
       }
-      for (const item of list) ctx.print(item);
+      // Explicit unknown target → error. No-arg on a leaf dir → silent (real ls).
+      if (target) ctx.print(`ls: ${target}: no such file or directory`);
     },
   },
   {
