@@ -2,6 +2,8 @@
 resources/
 hugo_stats.json
 .DS_Store
+# Hugo writes assets/jsconfig.json for IDE path-alias support when js.Build is used
+assets/jsconfig.json
 
 # Backup and temp files
 *.bak

@@ -10,7 +10,7 @@
   <div class="hero-inner">
     <div class="prompt reveal">
       <span class="dollar">$</span>
-      <span class="cmd">whoami</span><span class="cursor" aria-hidden="true"></span>
+      <span class="cmd">whoami</span><span class="cursor" aria-hidden="true"></span><span class="prompt-hint" data-typewriter="  // tip: press \ or click the cursor for an interactive shell"></span>
     </div>
 
     <h1 class="headline reveal reveal-1">
@@ -42,30 +42,24 @@
           <span role="columnheader">STATE</span>
           <span role="columnheader">UPTIME</span>
         </div>
-        <div class="ps-row" role="row">
-          <span class="ps-pid" role="cell">8421</span>
-          <span class="ps-name" role="cell">borgdock</span>
-          <span class="ps-state ps-state-running" role="cell">running v1.1.0</span>
-          <span class="ps-uptime" role="cell">shipping</span>
+        {{- $postCount := 0 -}}
+        {{- range os.ReadDir "content/posts" -}}
+          {{- if and (not .IsDir) (hasSuffix .Name ".md") (ne .Name "_index.md") -}}
+            {{- $postCount = add $postCount 1 -}}
+          {{- end -}}
+        {{- end -}}
+        {{- range site.Data.ps_running.rows }}
+          {{- $stateText := .state_text -}}
+          {{- if and .live (eq .live.kind "build-post-count") -}}
+            {{- $stateText = printf .live.template $postCount -}}
+          {{- end -}}
+        <div class="ps-row" role="row"{{- with .live }} data-live-kind="{{ .kind }}"{{- with .repo }} data-live-repo="{{ . }}"{{ end }}{{- with .since }} data-live-since="{{ . }}"{{ end }}{{- with .target }} data-live-target="{{ . }}"{{ end }}{{- with .template }} data-live-template="{{ . }}"{{ end }}{{- end }}>
+          <span class="ps-pid" role="cell">{{ .pid }}</span>
+          <span class="ps-name" role="cell">{{ .name }}</span>
+          <span class="ps-state {{ .state_class }}" role="cell">{{ $stateText }}</span>
+          <span class="ps-uptime" role="cell">{{ .uptime }}</span>
         </div>
-        <div class="ps-row" role="row">
-          <span class="ps-pid" role="cell">8422</span>
-          <span class="ps-name" role="cell">writing/ai-native</span>
-          <span class="ps-state ps-state-active" role="cell">3 posts queued</span>
-          <span class="ps-uptime" role="cell">weekly</span>
-        </div>
-        <div class="ps-row" role="row">
-          <span class="ps-pid" role="cell">8423</span>
-          <span class="ps-name" role="cell">gomocha/field-svc</span>
-          <span class="ps-state ps-state-active" role="cell">leading team of 6</span>
-          <span class="ps-uptime" role="cell">day job</span>
-        </div>
-        <div class="ps-row" role="row">
-          <span class="ps-pid" role="cell">8424</span>
-          <span class="ps-name" role="cell">dad-mode</span>
-          <span class="ps-state ps-state-warm" role="cell">always on</span>
-          <span class="ps-uptime" role="cell">since 2023</span>
-        </div>
+        {{- end }}
       </div>
     </div>
   </div>

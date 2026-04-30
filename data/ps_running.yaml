@@ -1,0 +1,37 @@
+rows:
+  - pid: 8421
+    name: borgdock
+    state_text: "running v1.1.0"
+    state_class: ps-state-running
+    uptime: shipping
+    live:
+      kind: github-release
+      repo: borght-dev/BorgDock
+      target: state
+      template: "running %s"
+
+  - pid: 8422
+    name: writing/ai-native
+    state_text: "3 posts queued"
+    state_class: ps-state-active
+    uptime: weekly
+    live:
+      kind: build-post-count
+      target: state
+      template: "%d posts queued"
+
+  - pid: 8423
+    name: gomocha/field-svc
+    state_text: "leading team of 6"
+    state_class: ps-state-active
+    uptime: "day job"
+
+  - pid: 8424
+    name: dad-mode
+    state_text: "always on"
+    state_class: ps-state-warm
+    uptime: "since 2023"
+    live:
+      kind: uptime
+      since: "2023-07-23"
+      target: uptime
