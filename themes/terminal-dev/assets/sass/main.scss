@@ -183,9 +183,8 @@ a:hover { color: var(--accent-deep); }
 /* ─── Hero (home only) ───────────────────────────────────────── */
 .hero {
   position: relative;
-  min-height: 100vh; min-height: 100svh;
   display: flex; flex-direction: column; justify-content: center;
-  padding: var(--s-12) var(--s-6) var(--s-16);
+  padding: var(--s-16) var(--s-6) var(--s-8);
   overflow: hidden;
 }
 .hero::before {
@@ -321,10 +320,11 @@ h1.headline {
 /* ─── Section / block layout ─────────────────────────────────── */
 section.block {
   padding: var(--s-16) var(--s-6);
-  max-width: var(--maxw);
+  max-width: calc(var(--maxw) + 2 * var(--s-6));
   margin: 0 auto;
 }
 section.block.tight { padding: var(--s-12) var(--s-6); }
+section.block#now-shipping { padding-top: var(--s-8); }
 
 .section-head {
   display: flex; align-items: baseline; gap: var(--s-3);
@@ -1413,7 +1413,7 @@ footer.foot {
 /* ─── Responsive ─────────────────────────────────────────────── */
 @media (max-width: 600px) {
   body { font-size: 14px; }
-  .hero { padding: var(--s-12) var(--s-4) var(--s-12); min-height: 90vh; }
+  .hero { padding: var(--s-12) var(--s-4) var(--s-8); }
   section.block { padding: var(--s-12) var(--s-4); }
   .featured { padding: var(--s-6); }
   .article-shell { padding: var(--s-8) var(--s-4) var(--s-12); }
