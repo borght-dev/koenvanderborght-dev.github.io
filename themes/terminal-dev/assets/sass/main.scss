@@ -2224,9 +2224,11 @@ footer.foot {
   display: flex;
   flex-direction: column;
   transform: translateY(100%);
-  transition: transform 220ms ease;
   z-index: 1000;
   box-shadow: 0 -8px 24px rgba(0,0,0,0.08);
+}
+@media (prefers-reduced-motion: no-preference) {
+  .shell-drawer { transition: transform 220ms ease; }
 }
 
 .shell-drawer.open { transform: translateY(0); }
@@ -2252,6 +2254,10 @@ footer.foot {
   font-size: 1rem; color: var(--ink-mute); padding: 0 var(--s-2);
 }
 .shell-close:hover { color: var(--ink); }
+.shell-close:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
 
 .shell-output {
   flex: 1;
@@ -2280,6 +2286,10 @@ footer.foot {
   color: var(--ink);
   font-family: var(--font-mono);
   font-size: inherit;
+}
+.shell-input:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
 }
 
 /* shell hint line in footer */
