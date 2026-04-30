@@ -223,10 +223,26 @@ export function bootShell() {
   }
 }
 
+function runTypewriters(root = document) {
+  root.querySelectorAll('[data-typewriter]').forEach((el) => {
+    const text = el.getAttribute('data-typewriter');
+    el.removeAttribute('data-typewriter');
+    el.textContent = '';
+    let i = 0;
+    const step = () => {
+      el.textContent = text.slice(0, i);
+      i++;
+      if (i <= text.length) setTimeout(step, 28);
+    };
+    setTimeout(step, 1200);
+  });
+}
+
 if (typeof window !== 'undefined' && typeof document !== 'undefined') {
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', () => bootShell());
+    document.addEventListener('DOMContentLoaded', () => { bootShell(); runTypewriters(); });
   } else {
     bootShell();
+    runTypewriters();
   }
 }

@@ -2316,25 +2316,12 @@ footer.foot {
 .hero .prompt .cursor { cursor: pointer; }
 .hero .prompt .cursor:hover { opacity: 0.7; }
 
-/* hero hint pointing at the shell */
-.hero-shell-hint {
-  margin: var(--s-2) 0 0;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
+/* hero typewriter hint, sits inline next to `$ whoami_` */
+.prompt-hint {
   color: var(--ink-mute);
-}
-.hero-shell-hint .hint-tag { color: var(--accent); margin-right: var(--s-2); }
-.hero-shell-hint kbd {
-  display: inline-block;
-  padding: 1px 6px;
-  border: 1px solid var(--rule-hard);
-  border-bottom-width: 2px;
-  border-radius: 4px;
-  background: var(--bg-elev);
-  color: var(--ink);
-  font-family: var(--font-mono);
   font-size: 0.85em;
-  line-height: 1;
+  white-space: pre;
+  font-family: var(--font-mono);
 }
 
 /* .ps-row uses display:contents, so its own background is invisible.
