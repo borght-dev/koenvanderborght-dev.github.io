@@ -48,3 +48,80 @@ export function writeCache(storage, key, value, now = Date.now()) {
     // localStorage disabled / quota — silently skip
   }
 }
+
+// ─── DOM runtime ──────────────────────────────────────────────
+
+const TICK_MS = 60_000;
+
+function rowStateEl(row) {
+  return row.querySelector('.ps-state');
+}
+
+function rowUptimeEl(row) {
+  return row.querySelector('.ps-uptime');
+}
+
+function applyToTarget(row, target, text) {
+  const el = target === 'uptime' ? rowUptimeEl(row) : rowStateEl(row);
+  if (el) el.textContent = text;
+}
+
+async function hydrateGithubRelease(row, repo, template, target) {
+  const cacheKey = `release:${repo}`;
+  const cached = readCache(localStorage, cacheKey);
+  if (cached) {
+    applyToTarget(row, target, template.replace('%s', cached));
+    return;
+  }
+  try {
+    const res = await fetch(`https://api.github.com/repos/${repo}/releases/latest`);
+    if (!res.ok) return;
+    const json = await res.json();
+    const version = parseLatestRelease(json);
+    if (!version) return;
+    writeCache(localStorage, cacheKey, version);
+    applyToTarget(row, target, template.replace('%s', version));
+  } catch (err) {
+    console.debug('[ps-live] release fetch failed', err);
+  }
+}
+
+function startUptimeTicker(row, since, target) {
+  const tick = () => applyToTarget(row, target, formatUptime(since));
+  tick();
+  let interval = setInterval(tick, TICK_MS);
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      clearInterval(interval);
+      interval = null;
+    } else if (interval === null) {
+      tick();
+      interval = setInterval(tick, TICK_MS);
+    }
+  });
+}
+
+export function bootPsLive(root = document) {
+  const rows = root.querySelectorAll('.ps-row[data-live-kind]');
+  rows.forEach((row) => {
+    const kind = row.getAttribute('data-live-kind');
+    const target = row.getAttribute('data-live-target') || 'state';
+    if (kind === 'github-release') {
+      const repo = row.getAttribute('data-live-repo');
+      const template = row.getAttribute('data-live-template') || '%s';
+      if (repo) hydrateGithubRelease(row, repo, template, target);
+    } else if (kind === 'uptime') {
+      const since = row.getAttribute('data-live-since');
+      if (since) startUptimeTicker(row, since, target);
+    }
+    // build-post-count is handled at Hugo build time — nothing to do client-side.
+  });
+}
+
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => bootPsLive());
+  } else {
+    bootPsLive();
+  }
+}

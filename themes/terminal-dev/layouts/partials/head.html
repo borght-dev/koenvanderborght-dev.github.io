@@ -36,6 +36,10 @@
 {{ $style := resources.Get "sass/main.scss" | css.Sass $opts | resources.Fingerprint }}
 <link rel="stylesheet" href="{{ $style.RelPermalink }}" integrity="{{ $style.Data.Integrity }}">
 
+{{ $jsOpts := dict "minify" true "format" "esm" "targetPath" "js/ps-live.js" }}
+{{ $psLive := resources.Get "js/ps-live.js" | js.Build $jsOpts | resources.Fingerprint }}
+<script type="module" src="{{ $psLive.RelPermalink }}" integrity="{{ $psLive.Data.Integrity }}" defer></script>
+
 <!-- RSS -->
 {{ range .AlternativeOutputFormats -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
