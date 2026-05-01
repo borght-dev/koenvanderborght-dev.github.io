@@ -19,13 +19,12 @@ The thing is, I am not great at keeping track of things/remembering things, so I
 ## The shape of the answer
 I always have been a Windows user, I’ve dabbled in some Linux in the past, but because I played PC games (read: League of Legends) I always came back to Windows. This has changed a little since I started using my Mac Mini M1 to help me be [more productive from my phone](link-to-termius-setup-goes-here).
 
-I like how some Mac apps live in the task bar, 
-A docked sidebar window:
+I have always liked the idea of a dock, a long, long time ago I was a big fan of Stardock ObjectDock. I am also one of the few that do like the idea of a widget bar/sidebar in Windows, but sadly Microsoft doesn't really make it possible to add your own widgets to it so I decided to ask Claude Code for some alternatives. 
 
-- Always visible on a second monitor edge
-- One row per open PR
-- CI status as the loudest visual element
-- Click → root-cause + auto-fix
+A docked sidebar window would always be visible on the edge of the screen, it can show a row per PR, show the CI status and with a single click it could spawn a Claude Code session with a system prompt to attempt to automatically fix any failing test. 
+
+# WPF
+Initially I thought, I’m a Windows user, what could be a better feel than native Windows technologies right?! Well, I was wrong. Implementing anything took much longer than I wanted and it never felt great. I also used Claude Code exclusively to write the code, and it turns out that Claude is much better at writing React code compared to writing WPF code, especially on the frontend. This also made it a lot harder to iterate on the UI, because whenever I would throw a mock which I created with claude.ai at Claude Code, it was always a much more “meh” experience compared to the “wow this looks pretty good”-mockups I would get at first. So after another awful outcome of a beautiful mockup, I decided to re-implementing PRDock in Tauri. Problem was, I already had some colleagues using this tool so I couldn’t ship a broken/half working version.
 
 ## Why Tauri
 
